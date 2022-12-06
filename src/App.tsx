@@ -5,7 +5,8 @@ import {Category} from './types/Category'
 import {items} from './data/items'
 import {categories} from './data/categories'
 
-import { filterListByMonth, getCurrentMonth } from "./helpers/dateFilters"
+import { FilterListByMonth, GetCurrentMonth } from "./helpers/dateFilters"
+import { TableArea } from "./components/TableArea"
 
 
 
@@ -13,10 +14,10 @@ export const App = () => {
   const [list, setList] = useState(items)
   const [filterList, setFilterList] = useState<Item[]>([])
 
-  const [currentMonth, setCurrentMonth] = useState(getCurrentMonth())
+  const [currentMonth, setCurrentMonth] = useState(GetCurrentMonth())
 
   useEffect(() =>{
-    setFilterList(filterListByMonth(list, currentMonth))
+    setFilterList(FilterListByMonth(list, currentMonth))
   }, [list, currentMonth])
 
 
@@ -27,7 +28,7 @@ export const App = () => {
         <C.HeaderText> Sistema Financeiro</C.HeaderText>
        </C.Header>
        <C.Body>
-        ...
+        <TableArea list={filterList}/>
        </C.Body>
     </C.Container>
   )
