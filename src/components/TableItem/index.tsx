@@ -13,7 +13,12 @@ export const TableItem = ({item}: Props) => {
             <C.TableColum>{FormatDate(item.date)}</C.TableColum>
             <C.TableColum><C.Category color={categories[item.category].color}>{ categories[item.category].title}</C.Category></C.TableColum>
             <C.TableColum>{item.title}</C.TableColum>
-            <C.TableColum>R${item.value}</C.TableColum>
+            <C.TableColum>
+                <C.Value color= {categories[item.category].expense ? 'red' : 'green'}>
+                  R${item.value}  
+                </C.Value>
+                
+            </C.TableColum>
 
         </C.TableLine>
     )

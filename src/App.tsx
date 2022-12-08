@@ -25,7 +25,7 @@ export const App = () => {
     
     <C.Container>
        <C.Header>
-        <C.HeaderText> Sistema Financeiro</C.HeaderText>
+        <C.HeaderText> $istema Financeiro</C.HeaderText>
        </C.Header>
        <C.Body>
         <TableArea list={filterList}/>
