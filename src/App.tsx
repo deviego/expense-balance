@@ -7,7 +7,8 @@ import {categories} from './data/categories'
 
 import { FilterListByMonth, GetCurrentMonth } from "./helpers/dateFilters"
 import { TableArea } from "./components/TableArea"
-import { InfoArea } from "./components/infoArea"
+import { InfoArea } from "./components/InfoArea"
+import { InputArea } from "./components/IntputArea"
 
 
 
@@ -24,14 +25,30 @@ export const App = () => {
     setFilterList(FilterListByMonth(list, currentMonth))
   }, [list, currentMonth])
 
+  useEffect(() => {
+    let countIncome = 0
+    let countExpense = 0 
+    
+    for(let i in filterList) { 
+      if(categories[filterList[i].category].expense){
+         countExpense +=filterList[i].value
+      }else{
+        countIncome +=filterList[i].value
+      }
+    }
+    setIncome(countIncome)
+    setExpense(countExpense)
+  },[filterList])
+
   const handleChangeMonth = (newMonth : string)=> {
     setCurrentMonth(newMonth)
   }
-  const total = (): number => {
-    let some = expense - income
-    return some
-  }
 
+  const handleAddItem =  (item:Item) => {
+    let newList = [...list]
+    newList.push(item);
+    setList(newList)
+  }
   return(
     
     <C.Container>
@@ -39,15 +56,17 @@ export const App = () => {
         <C.HeaderText> $istema Financeiro</C.HeaderText>
         
        </C.Header>
-       
+      
        <C.Body>
-        <InfoArea 
+        <InfoArea
         income={income}
         expense={expense}
-        total={total}
         onMonthChange={handleChangeMonth}
         currentMonth={currentMonth}/>
-        <TableArea list={filterList}/>
+        <TableArea list={filterList}/> 
+        <InputArea
+        onAdd={handleAddItem}
+        />
        </C.Body>
     </C.Container>
   )
