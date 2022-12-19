@@ -6,8 +6,8 @@ type Prop = {
 export const InputArea = ({onAdd}: Prop ) => { 
     return(
         <C.container>
-            <button onClick={}>Adicionar</button>
         
-        </>
+        
+        </C.container>
     )
 }
